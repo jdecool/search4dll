@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"time"
 )
@@ -14,6 +15,10 @@ import (
 var dumpbinPath string
 
 func main() {
+	if runtime.GOOS != "windows" {
+		log.Fatalln("This application can only run on Windows")
+	}
+
 	flag.Parse()
 	if flag.NArg() != 2 {
 		log.Fatalln("Missing arguments: search4dll.exe PATH FILENAME")
